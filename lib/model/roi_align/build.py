@@ -3,11 +3,11 @@ import os
 import torch
 from torch.utils.ffi import create_extension
 
-sources = ['src/roi_align.c']
-headers = ['src/roi_align.h']
+#sources = ['src/roi_align.c']
+#headers = ['src/roi_align.h']
 extra_objects = []
-#sources = []
-#headers = []
+sources = []
+headers = []
 defines = []
 with_cuda = False
 

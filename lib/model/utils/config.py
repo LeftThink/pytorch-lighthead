@@ -18,6 +18,10 @@ cfg = __C
 #
 __C.TRAIN = edict()
 
+# add by zuosi
+# LargeSeparableConv2d kernel size
+__C.TRAIN.LSC_KERNEL_SIZE = 7
+
 # Initial learning rate
 __C.TRAIN.LEARNING_RATE = 0.001
 
@@ -60,7 +64,7 @@ __C.TRAIN.SUMMARY_INTERVAL = 180
 
 # Scale to use during training (can list multiple scales)
 # The scale is the pixel size of an image's shortest side
-__C.TRAIN.SCALES = (600,)
+__C.TRAIN.SCALES = (224,)
 
 # Max pixel size of the longest side of a scaled input image
 __C.TRAIN.MAX_SIZE = 1000
@@ -289,7 +293,8 @@ __C.POOLING_SIZE = 7
 __C.MAX_NUM_GT_BOXES = 20
 
 # Anchor scales for RPN (Default: [8,16,32], COCO: [4,8,16,32])
-__C.ANCHOR_SCALES = [8,16,32]
+# __C.ANCHOR_SCALES = [8,16,32] 
+__C.ANCHOR_SCALES = [4,8,16,32] # for car
 
 # Anchor ratios for RPN
 __C.ANCHOR_RATIOS = [0.5,1,2]

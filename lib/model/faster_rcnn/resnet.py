@@ -39,7 +39,7 @@ class ResNet(nn.Module):
     self.layer1 = self._make_layer(block, 64, layers[0])
     self.layer2 = self._make_layer(block, 128, layers[1], stride=2)
     self.layer3 = self._make_layer(block, 256, layers[2], stride=2)
-    self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
+    self.layer4 = self._make_layer(block, 512, layers[3], stride=2) # conv5_x
     # it is slightly better whereas slower to set stride = 1
     # self.layer4 = self._make_layer(block, 512, layers[3], stride=1)
     self.avgpool = nn.AvgPool2d(7)
@@ -173,6 +173,10 @@ class resnet(_fasterRCNN):
 
     if self.lighthead:
       self.lighthead_base = nn.Sequential(resnet.layer4)
+      # description from paper about R-CNN subnet, Here we only employ a single
+      # fully-connected layer with 2048 channels(no dropout) in R-CNN subnet,
+      # followed by two sibling fully connected layer to predict RoI classification 
+      # and regression.
       self.RCNN_top = nn.Sequential(nn.Linear(490 * 7 * 7, 2048), nn.ReLU(inplace=True))    # 490 channels input into FC layer
     else:
       self.RCNN_top = nn.Sequential(resnet.layer4)

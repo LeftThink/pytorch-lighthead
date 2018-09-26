@@ -30,7 +30,7 @@ class _fasterRCNN(nn.Module):
         if self.lighthead:
             self.lh_mode = 'S' if compact_mode else 'L'
             self.lsconv = LargeSeparableConv2d(
-                self.dout_lh_base_model, bias=False, bn=False, setting=self.lh_mode)
+                self.dout_lh_base_model, kernel_size=cfg.TRAIN.LSC_KERNEL_SIZE, bias=False, bn=False, setting=self.lh_mode)
             self.lh_relu = nn.ReLU(inplace=True)
 
         # define rpn
