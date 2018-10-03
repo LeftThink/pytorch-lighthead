@@ -9,6 +9,7 @@ from model.utils.config import cfg
 from datasets.factory import get_imdb
 import PIL
 import pdb
+import sys
 
 def prepare_roidb(imdb):
   """Enrich the imdb's roidb by adding some derived quantities that
@@ -17,13 +18,15 @@ def prepare_roidb(imdb):
   each ground-truth box. The class with maximum overlap is also
   recorded.
   """
-
+  
   roidb = imdb.roidb
   if not (imdb.name.startswith('coco')):
     sizes = [PIL.Image.open(imdb.image_path_at(i)).size
          for i in range(imdb.num_images)]
-         
+
   for i in range(len(imdb.image_index)):
+    #sys.stdout.write('prepare: {:d}/{:d}  \r'.format(i+1, imdb.num_images))
+    #sys.stdout.flush()
     roidb[i]['img_id'] = imdb.image_id_at(i)
     roidb[i]['image'] = imdb.image_path_at(i)
     if not (imdb.name.startswith('coco')):

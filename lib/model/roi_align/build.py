@@ -18,6 +18,8 @@ if torch.cuda.is_available():
     print('Including CUDA code.')
     sources += ['src/roi_align_cuda.c']
     headers += ['src/roi_align_cuda.h']
+    #sources += ['src/roi_align.c']
+    #headers += ['src/roi_align.h']
     defines += [('WITH_CUDA', None)]
     with_cuda = True
     

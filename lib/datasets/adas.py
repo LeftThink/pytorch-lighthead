@@ -1,3 +1,4 @@
+# coding: utf-8
 # --------------------------------------------------------
 # Fast R-CNN
 # Copyright (c) 2015 Microsoft
@@ -127,6 +128,7 @@ class adas(imdb):
         """
         cache_file = os.path.join(self.cache_path, self.name + '_gt_roidb.pkl')
         if os.path.exists(cache_file):
+            print(cache_file)
             with open(cache_file, 'rb') as fid:
                 roidb = cPickle.load(fid)
             print('{} gt roidb loaded from {}'.format(self.name, cache_file))
